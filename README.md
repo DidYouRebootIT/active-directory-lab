@@ -25,13 +25,17 @@ I installed the Active Directory Domain Services (AD DS) role on the server and 
 ---
 
 ## 👤 User and Domain Management
-Using Active Directory Users and Computers, I:
+Using Active Directory Users and Computers I:
 - Created a basic domain structure
 - Added user accounts for testing
+
+![Domain management](https://github.com/Chronysync/active-directory-lab/raw/main/images/domain%20mngmnt.png)
 
 The client machine was then:
 - Joined to the domain
 - Authenticated using a domain user account
+
+![User authentication](https://github.com/Chronysync/active-directory-lab/raw/main/images/user.png)
 
 ---
 
