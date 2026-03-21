@@ -1,5 +1,5 @@
 
-# 🧠 Case Study #3: Active Directory Domain Setup (VirtualBox)
+# 🧠 Case Study #1: Active Directory Domain Setup (VirtualBox)
 
 ## 🎯 Goal
 To gain practical experience with Active Directory, I set up a small virtual lab environment using Windows Server and a Windows client machine.
