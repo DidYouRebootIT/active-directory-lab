@@ -1,6 +1,10 @@
 
 # 🧠 Case Study #1: Active Directory Domain Setup (VirtualBox)
 
+**📅 Date:** March 2026
+
+---
+
 ## 🎯 Goal
 To gain practical experience with Active Directory, I set up a small virtual lab environment using Windows Server and a Windows client machine.
 
