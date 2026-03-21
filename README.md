@@ -12,15 +12,14 @@ The objective was to configure a basic domain structure and manage users within 
 - Oracle VirtualBox
 - Windows Server
 - Windows Enterprise (Client)
-- ![lab environment](images/lab env.png)
+
+![Lab environment](https://github.com/Chronysync/active-directory-lab/raw/main/images/lab%20env.png))
+
 
 ---
 
 ## ⚙️ Domain Configuration
 I installed the Active Directory Domain Services (AD DS) role on the server and promoted it to a Domain Controller.
-
-### 📸 Screenshots
-![AD Setup](images/ad-setup.png)
 
 ---
 
@@ -32,10 +31,6 @@ Using Active Directory Users and Computers, I:
 The client machine was then:
 - Joined to the domain
 - Authenticated using a domain user account
-
-### 📸 Screenshots
-![Users](images/users.png)
-![Client Join](images/client-join.png)
 
 ---
 
