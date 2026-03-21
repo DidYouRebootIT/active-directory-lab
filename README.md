@@ -1,5 +1,5 @@
 
-# 🧠 Case Study #1: Active Directory Domain Setup (VirtualBox)
+# 🧠 Case Study: Active Directory Domain Setup (VirtualBox)
 
 **📅 Date:** March 2026
 
