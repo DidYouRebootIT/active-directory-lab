@@ -12,6 +12,7 @@ The objective was to configure a basic domain structure and manage users within 
 - Oracle VirtualBox
 - Windows Server
 - Windows Enterprise (Client)
+- ![lab environment](images/lab env.png)
 
 ---
 
