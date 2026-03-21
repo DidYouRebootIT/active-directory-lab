@@ -13,7 +13,7 @@ The objective was to configure a basic domain structure and manage users within 
 - Windows Server
 - Windows Enterprise (Client)
 
-![Lab environment](https://github.com/Chronysync/active-directory-lab/raw/main/images/lab%20env.png))
+![Lab environment](https://github.com/Chronysync/active-directory-lab/raw/main/images/lab%20env.png)
 
 
 ---
