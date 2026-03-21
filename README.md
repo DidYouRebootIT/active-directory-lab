@@ -15,11 +15,12 @@ The objective was to configure a basic domain structure and manage users within 
 
 ![Lab environment](https://github.com/Chronysync/active-directory-lab/raw/main/images/lab%20env.png)
 
-
 ---
 
 ## ⚙️ Domain Configuration
 I installed the Active Directory Domain Services (AD DS) role on the server and promoted it to a Domain Controller.
+
+![Domain configuration](https://github.com/Chronysync/active-directory-lab/raw/main/images/domain%20config.jpg)
 
 ---
 
