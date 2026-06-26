@@ -59,7 +59,7 @@ The server rebooted automatically after promotion. On login, the domain `DIDYOUR
 
 Before joining the domain, I updated the DNS settings on the Windows 11 VM to point to the DC's IP address (`192.168.112.129`). This is a required step — the client needs to be able to resolve `didyourebootit.local`, which only the DC's DNS server knows about. Without this, the domain join fails.
 
-![Client IP](images/2.%20Setting%20the%20IP%20of%20the%20client.png)
+![Client IP](images/5.%20Setting%20the%20IP%20of%20the%20client.png)
 
 ### Domain Join
 
