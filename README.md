@@ -57,7 +57,7 @@ The server rebooted automatically after promotion. On login, the domain `DIDYOUR
 
 ### DNS Configuration on the Client
 
-Before joining the domain, I updated the DNS settings on the Windows 11 VM to point to the DC's IP address (`192.168.112.129`). This is a required step — the client needs to be able to resolve `didyourebootit.local`, which only the DC's DNS server knows about. Without this, the domain join fails.
+Before joining the domain, I updated the DNS settings on the Windows 11 VM to point to the DC's IP address (`192.168.112.129`). This is a required step because the client needs to be able to resolve `didyourebootit.local`, which only the DC's DNS server knows about. Without this the domain join fails.
 
 ![Client IP](images/5.%20Setting%20the%20IP%20of%20the%20client.png)
 
@@ -80,7 +80,7 @@ On the DC, opened Active Directory Users and Computers (ADUC) and created a new 
 
 ![Creating a user](images/13.%20Making%20a%20new%20user.png)
 
-Logged into the Windows 11 VM using this account. Login was successful, confirming the full AD authentication chain was working — client contacts DC, DC authenticates the user, session starts.
+Logged into the Windows 11 VM using this account. Login was successful, confirming the full AD authentication chain was working: client contacts DC, DC authenticates the user, session starts.
 
 ![Successful login](images/14.%20Stefanija%20Stefanovska%20successful%20login.png)
 
