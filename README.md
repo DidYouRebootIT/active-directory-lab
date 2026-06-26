@@ -47,7 +47,7 @@ With the static IP in place, I installed the AD DS role through Server Manager u
 - Operation: Add a new forest
 - Root domain name: `didyourebootit.local`
 
-![New forest](images/6.%20New%20forest.png) 
+![New forest](images/6.%20New%20forest.png)
 
 The server rebooted automatically after promotion. On login, the domain `DIDYOUREBOOTIT` was visible on the login screen, confirming the DC was active.
 
@@ -59,9 +59,13 @@ The server rebooted automatically after promotion. On login, the domain `DIDYOUR
 
 Before joining the domain, I updated the DNS settings on the Windows 11 VM to point to the DC's IP address (`192.168.112.129`). This is a required step — the client needs to be able to resolve `didyourebootit.local`, which only the DC's DNS server knows about. Without this, the domain join fails.
 
+![Client IP](images/2.%20Setting%20the%20IP%20of%20the%20client.png)
+
 ### Domain Join
 
 Joined the machine to the domain via Settings > System > About > Domain or workgroup. Entered `didyourebootit.local`, authenticated with domain administrator credentials, and restarted.
+
+![Joining a domain](images/11.%20Joining%20a%20domain.png)
 
 After reboot, the login screen displayed the option to sign in with a domain account, confirming the machine was successfully joined.
 
