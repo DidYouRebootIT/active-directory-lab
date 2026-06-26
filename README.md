@@ -91,6 +91,5 @@ During setup, `nslookup didyourebootit.local` and `ping didyourebootit.local` bo
 ## What's Next
 
 - Create Organizational Units (IT, HR, Sales) and organize users into them
-- Configure Group Policy Objects — password policy, drive mapping
+- Configure Group Policy Objects: password policy, drive mapping
 - Simulate a helpdesk scenario: user account lockout and unlock via ADUC
-- Expand the lab with Wazuh for log monitoring and event alerting?
