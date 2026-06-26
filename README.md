@@ -47,6 +47,8 @@ With the static IP in place, I installed the AD DS role through Server Manager u
 - Operation: Add a new forest
 - Root domain name: `didyourebootit.local`
 
+![New forest](images/6.%20New%20forest.png) 
+
 The server rebooted automatically after promotion. On login, the domain `DIDYOUREBOOTIT` was visible on the login screen, confirming the DC was active.
 
 ---
