@@ -1,83 +1,96 @@
-# 🧠 Case Study: Active Directory Lab – Initial Setup (v1)
+# Active Directory Home Lab
 
-## 📅 Date
-March 2026
+## Overview
 
----
+Set up a functioning Active Directory environment from scratch using VMware Workstation. The lab consists of a Windows Server 2022 Domain Controller and a Windows 11 client machine joined to the domain. The goal was to simulate a real-world AD environment and document the process end to end.
 
-## 🎯 Goal
-To simulate a basic enterprise environment using Active Directory Domain Services (AD DS) by:
-- Creating a domain controller  
-- Organizing resources into structured Organizational Units  
-- Managing users and groups  
+**Tools used:** VMware Workstation, Windows Server 2022, Windows 11
+
+**Domain:** `didyourebootit.local`
 
 ---
 
-## ⚙️ Environment
-- Virtual Machine: Windows Server 2022  
-- Role Installed: Active Directory Domain Services (AD DS)  
-- Domain Controller: Configured and promoted  
-- Tools Used: Server Manager, Active Directory Users and Computers (ADUC)  
+## Environment
+
+| Machine | OS | Role | Hostname |
+|---|---|---|---|
+| VM 1 | Windows Server 2022 | Domain Controller | DidYouRebootIT-Domain-Controller |
+| VM 2 | Windows 11 | Domain Client | — |
 
 ---
 
-## 🧩 Tasks Performed
-- Installed and configured Active Directory Domain Services  
-- Promoted the server to a Domain Controller  
+## Part 1 — Setting Up the Domain Controller
 
-- Created a structured OU hierarchy:
-  - Macedonia  
-  - UK  
-  - Germany  
+### Static IP Configuration
 
-- Within each country OU:
-  - Users  
-  - Computers  
-  - Servers  
+Before promoting the server to a Domain Controller, I assigned it a static IP address. A DC needs a fixed IP because client machines and DNS rely on it being at a consistent, predictable address.
 
-- Created distribution groups in **Macedonia → Users**  
-- Created user: **Petko Petkovski**  
-- Assigned the user to relevant groups  
+**Network configuration applied:**
 
----
+| Setting | Value |
+|---|---|
+| IP Address | 192.168.112.129 |
+| Subnet Mask | 255.255.255.0 |
+| Default Gateway | 192.168.112.2 |
+| Preferred DNS | 192.168.112.129 (itself) |
+| Alternate DNS | 8.8.8.8 |
 
-## 🏗️ OU Structure
+The DC points to itself as the primary DNS server because it will host the DNS role and needs to resolve its own domain. The alternate DNS (Google) is set as a fallback for external name resolution in the lab environment. In a production environment this would be handled via forwarders configured in DNS Manager rather than pointing clients to an external DNS directly.
 
-```
-Domain
-├── Macedonia
-│   ├── Users
-│   ├── Computers
-│   └── Servers
-├── UK
-│   ├── Users
-│   ├── Computers
-│   └── Servers
-└── Germany
-    ├── Users
-    ├── Computers
-    └── Servers
-```
+### Installing Active Directory Domain Services
 
-## 📸 Screenshots
+With the static IP in place, I installed the AD DS role through Server Manager using the Add Roles and Features wizard. After installation, I ran the post-deployment configuration to promote the server to a Domain Controller.
 
-- ![Installing AD DS](https://github.com/DidYouRebootIT/active-directory-lab/blob/main/images/1.%20Installing%20AD%20DS.jpg)
-- ![Promoting the server to a Domain Controller](https://github.com/DidYouRebootIT/active-directory-lab/blob/main/images/2.%20Promoting%20the%20server%20to%20a%20Domain%20Controller.jpg)
-- ![Succesfully installed AD DS](https://github.com/DidYouRebootIT/active-directory-lab/blob/main/images/3.%20Succesfully%20isntalled%20AD%20DS.jpg)
-- ![Organizational units, groups and users](https://github.com/DidYouRebootIT/active-directory-lab/blob/main/images/4.%20Organizational%20units%2C%20groups%20and%20users.jpg)
+**Deployment configuration:**
+- Operation: Add a new forest
+- Root domain name: `didyourebootit.local`
+
+The server rebooted automatically after promotion. On login, the domain `DIDYOUREBOOTIT` was visible on the login screen, confirming the DC was active.
 
 ---
 
-## 💡 What I Learned
-- How to install and configure Active Directory Domain Services  
-- The process of promoting a server to a Domain Controller  
-- Best practices for structuring Organizational Units  
-- Basic user and group management  
-- Difference between distribution and security groups  
+## Part 2 — Joining the Windows 11 Client to the Domain
+
+### DNS Configuration on the Client
+
+Before joining the domain, I updated the DNS settings on the Windows 11 VM to point to the DC's IP address (`192.168.112.129`). This is a required step — the client needs to be able to resolve `didyourebootit.local`, which only the DC's DNS server knows about. Without this, the domain join fails.
+
+### Domain Join
+
+Joined the machine to the domain via Settings > System > About > Domain or workgroup. Entered `didyourebootit.local`, authenticated with domain administrator credentials, and restarted.
+
+After reboot, the login screen displayed the option to sign in with a domain account, confirming the machine was successfully joined.
 
 ---
 
-## 🔄 Next Steps / In Progress
-- Add more users and simulate departments  
-- Implement Group Policy Objects (GPOs)  
-- Join client machines to the domain  
+## Part 3 — Creating a Domain User
+
+On the DC, opened Active Directory Users and Computers (ADUC) and created a new user in the default Users container:
+
+- **Display name:** Stefanija Stefanovska
+- **Logon name:** (domain account)
+
+Logged into the Windows 11 VM using this account. Login was successful, confirming the full AD authentication chain was working — client contacts DC, DC authenticates the user, session starts.
+
+---
+
+## Troubleshooting — DNS Resolution Failure
+
+During setup, `nslookup didyourebootit.local` and `ping didyourebootit.local` both failed from the Windows 11 VM even though the domain was configured correctly on the DC.
+
+**Diagnostic step:** Ran `ipconfig /all` on the Windows 11 VM and checked the DNS Servers field.
+
+**Root cause:** A one-digit typo in the DNS server IP address on the client's NIC settings. The VM was querying the wrong address, getting no response, and failing to resolve the domain.
+
+**Fix:** Corrected the DNS server IP to `192.168.112.129`. Both `nslookup` and `ping` resolved immediately after.
+
+**Takeaway:** `ipconfig /all` is the right first step when DNS isn't resolving. It immediately shows which DNS server the machine is actually querying, which either confirms or rules out a misconfiguration at the client level.
+
+---
+
+## What's Next
+
+- Create Organizational Units (IT, HR, Sales) and organize users into them
+- Configure Group Policy Objects — password policy, drive mapping
+- Simulate a helpdesk scenario: user account lockout and unlock via ADUC
+- Expand the lab with Wazuh for log monitoring and event alerting?
