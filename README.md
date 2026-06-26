@@ -82,7 +82,7 @@ On the DC, opened Active Directory Users and Computers (ADUC) and created a new 
 
 Logged into the Windows 11 VM using this account. Login was successful, confirming the full AD authentication chain was working — client contacts DC, DC authenticates the user, session starts.
 
-![Successful login](images/14.%20Stefanija%20Stefanovska%20Successful%20login.png)
+![Successful login](images/14.%20Stefanija%20Stefanovska%20successful%20login.png)
 
 ---
 
