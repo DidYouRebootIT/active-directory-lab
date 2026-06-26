@@ -37,6 +37,8 @@ Before promoting the server to a Domain Controller, I assigned it a static IP ad
 
 The DC points to itself as the primary DNS server because it will host the DNS role and needs to resolve its own domain. The alternate DNS (Google) is set as a fallback for external name resolution in the lab environment. In a production environment this would be handled via forwarders configured in DNS Manager rather than pointing clients to an external DNS directly.
 
+![DC IP configuration](images/1. Static IP No More.png)
+
 ### Installing Active Directory Domain Services
 
 With the static IP in place, I installed the AD DS role through Server Manager using the Add Roles and Features wizard. After installation, I ran the post-deployment configuration to promote the server to a Domain Controller.
